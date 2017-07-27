@@ -28,11 +28,19 @@
 
 **someNode.nodeType**  就可表示一个节点类型。 返回的阿拉伯数字对应下面的节点类型
 
-* Node.ELEMENT_NODE; // 1 元素节点
+* Node.**ELEMENT_NODE**; // 1 元素节点 例如 <p> <div>
 
   document.querySelector('html').nodeType === 1; // html 文档元素 节点类型是元素节点 
 
-* Node.ATTRIBUTE_NODE(2)；// 2 属性节点
+* Node.ATTRIBUTE_NODE(2); // 2 属性节点
+
+* Node.**TEXT_NODE**; // 3 ELement 或者Attr 中的文字
+
+* Node.COMMENT_NODE; // 8 comment节点
+
+* DOCUMENT_NODE; // 9 Document 节点
+
+*  
 
 ### Node类型
 
