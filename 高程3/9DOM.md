@@ -42,7 +42,7 @@ docuemnt // document nodeType是9
 
 * DOCUMENT_NODE; // 9 Document 节点
 
-*  
+*  ​
 
 ### Node类型
 
@@ -71,7 +71,25 @@ document.querySelector('html').nodeType; // 9 元素节点
 
   每一个节点都有childNodes属性。保存一个NodeList对象。它是一种类数组对象，用于保存一组有序的节点。可以通过位置来访问这些节点。他不是一个数组，类似数组。它实际上是基于COM结构动态执行查询的结果，因此DOM结构的变化能够自动反映在NodeList对象中。
 
-  ​
+  ```javascript
+  // 如何访问保存在NodeList中的节点
+  var firstChild = someNode.childNodes[0];
+  someNode.childNode[0] === someNode.firstChild;
+  var secondChild = someNode.childNodes.item(1);
+  var count = someNode.childNodes.length; // nodelist的长度
+  someNode.parentNode; // 当前节点的父节点
+
+  someNode.hasChildNodes(); // 判断这个节点是否有子节点 返回布尔值
+
+  // 将NodeList 转为 数组
+  Array.prototype.slice.call(someNode.childNodes);
+  ```
+
+  每一个节点都有一个parentNode属性。 包含在childNodes列表中的每个节点相互之间都是同胞节点。使用列表中每个节点的previousSibling和nextSibling属性。 列表中第一个节点的previousSibling属性为nul，而列表中最后一个节点的nextSibling属性的值同样为null。
+
+  * hasChildNodes() 也是一个非常有用的方法。这个方法在节点包含一个或者多个子节点的情况下 返回true
+
+    ​
 
 * ​
 
