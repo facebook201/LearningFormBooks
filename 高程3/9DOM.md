@@ -8,7 +8,9 @@
 
 **文档节点是每个文档的根节点。** 即document。这里的文档节点只有一个子节点 即html元素。 称为**文档元素**
 
+docuemnt // document nodeType是9
 
+​	html // element nodeType 是 1
 
 ```html
 <html> // Element
@@ -36,4 +38,54 @@
 
 ### Node类型
 
-所有的节点类型都继承自Node。所有的节点类型都共享着基本的属性和方法。每个节点都有一个nodeType属性。表示节点的类型。
+所有的节点类型都继承自Node。所有的节点类型都共享着基本的属性和方法。每个节点都有一个nodeType属性。表示节点的类型。为了确保浏览器兼容，最好还是讲nodeTpye数学的数字值进行比较。
+
+```javascript
+if (someNode.nodeType === 1) // 兼容所有的浏览器
+
+document.nodeType; // 1 文档节点
+document.querySelector('html').nodeType; // 9 元素节点
+```
+
+* 1 **nodeName** 和 **nodeValue** 属性
+
+  这两个值完全取决于节点类型。 使用之前 最好先检测一下节点类型。
+
+  if (someNode.nodeType === 1) {
+
+  ​	value = someNode.nodeName; 
+
+  }
+
+  **对于元素节点。nodeName中保存的始终都是元素的标签名.而nodeValue的值始终为null**
+
+* **节点关系**
+
+  每一个节点都有childNodes属性。保存一个NodeList对象。它是一种类数组对象，用于保存一组有序的节点。可以通过位置来访问这些节点。他不是一个数组，类似数组。它实际上是基于COM结构动态执行查询的结果，因此DOM结构的变化能够自动反映在NodeList对象中。
+
+  ​
+
+* ​
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
