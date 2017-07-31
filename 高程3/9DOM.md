@@ -42,7 +42,7 @@ docuemnt // document nodeType是9
 
 * DOCUMENT_NODE; // 9 Document 节点
 
-*  ​
+* ​
 
 ### Node类型
 
@@ -226,11 +226,55 @@ ELement类型就要算用的最多的类型。具有以下特征
 
 Element类型是使用attributes属性的唯一一个DOM节点类型。包含一个NamedNodeMap，是一个集合。类似于NodeList。也是一个"动态"集合。元素的每一共特性都有一个attr节点表示。
 
-*
+
+
+#### 创建节点
+
+* createElement 
+
+  document.createElement(元素标签); 创建元素节点
+
+* createAttribute 
+
+  document.createAttribute(元素属性) 创建属性节点
+
+* createTextNode 
+
+  document.createTextNode(文本内容) 创建文本节点
+
+  ​
+
+#### 文档片段 DocumentFragment类型
+
+在所有类型中，只有DocumentFragement在文档中没有对应的标记。DOM规定文档片段是一种轻量级的文档。
+
+* nodeType 为11
+* nodeName 值是 '#document-fragment'
+* nodeValue 是 null
+* parentNode值是null
 
 
 
+假设我们为ul元素添加三个列表项。如果逐个添加列表项。将会导致浏览器反复渲染 
 
+```javascript
+var fragment = document.createDocumentFragment();
+var ul = document.getElementById('ul');
+var li = null;
+
+for (var i = 0; i < 3; i++) {
+  li = document.createElement('li');
+  li.appendChild(document.createTextNode('item ' + (i + 1)));
+  fragment.appendChild(li);
+}
+ul.appendChild(fragment);
+```
+
+
+
+#### DOM扩展
+
+querySelector() 方法 接收一个CSS选择符。返回与该模式匹配的第一个元素
 
 
 
