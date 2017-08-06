@@ -272,33 +272,174 @@ ul.appendChild(fragment);
 
 
 
-#### DOM扩展
-
-querySelector() 方法 接收一个CSS选择符。返回与该模式匹配的第一个元素
 
 
+##### 插入标记 1. innerHTML 属性
 
-
+在读写模式下。innerHTML属性返回与调用元素的所有子节点对应的HTML标记。
 
 
 
+* element的children是一个只读属性，返回一个Node的子elements的 HTMLCollection实例，只包含元素中同样的子节点。除此之外 children 属性与childNodes没有区别。即在元素中只包含元素节点。
+
+  ​
+
+* contains() 方法 返回一个布尔值 来表示传入的节点是否为该节点的后代节点。Node.contains
+
+  实际开发中 经常需要知道某个节点是不是另一个节点的后代。方法接受一个参数 即检测后代节点。如果被检测的节点是后代节点，该方法返回true; 否则false
+
+  ```javascript
+  document.documentElement.contains(node);
+  ```
+
+* innerText 属性
+
+  innerText属性可以操作元素中包含的所有文本内容。包括子文档树种的文本。在通过innerText读取值时。
+
+  在通过innerText写入值的时候。会删除元素的所有子节点 插入包含相应文本值的文本节点。
+
+  ```html
+  <div id="app">
+    <p>This is a list</p>
+    <ul>
+    	<li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+  </div>
+  ```
+
+  ```javascript
+  // 这里 我们先来看看 innerHTML 和 innerText的区别
+  var parentNode = document.querySelector('#app');
+  parentNode.innerHTML; 
+  /**
+    <p>This is a list</p>
+    <ul>
+    	<li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+  */
+
+  /** innerText 
+   * This is a list
+   * Item 1
+   * Item 1
+   * Item 1
+   */
+
+  parentNode.innerText = 'hello world';
+  // 最后就是下面的结构
+  <div id="app">Hello world!</div>
+  ```
+
+  我们可以看到 两者的区别。innerText返回的值text内容。不会返回dom。 
 
 
 
 
 
+### DOM2 和 DOM3
+
+
+
+* 12.2 样式
+
+  任何支持style特性的html元素在JavaScript中都有一个对应的style属性。 这个对象是一个CSSStyleDeclaration的实例。
+
+  ```javascript
+  var node = document.getElementById('app');
+
+  node.style.backgroundColor = '#f00'; // 设置node盒子的背景色是红色
+  ```
+
+  其中一个不能直接转换的CSS属性是float。由于它是js的保留字。不能用作属性名。 cssFloat;IE支持styleFloat;
+
+
+
+*  计算的样式 
+
+  “DOM2级样式增强了document.defaultView” 提供了getComputedStyle方法、这个方法接受两个参数：要取得计算样式的元素和一个为元素字符串。如果不需要 第二个参数可以为null. 返回CSSStyleDeclaration对象。包含所有当前元素的所有计算样式。
+
+  ```javascript
+  var box = document.getElementById('myDiv');
+  // 判断是否存在 特性检测
+  if (document.defaultView) {
+    
+  }
+  var computedStyle = document.defaultView.getComputedStyle(box, null);
+  ```
+
+  ​
+
+* 元素大小
+
+  * 偏移量
+
+    * offsetHeight: 元素在垂直方向上占用的空间大小。像素为单位。
+
+    * offsetWidth: 元素在水平方向上占用大小。 包括边框 clientWidth 不包括边框
+
+      width + padding + margin + border
+
+    * offsetLeft：元素的左外边框至包含元素的左内边框之间的像素距离。
+
+    * offsetTop：元素的上外边框至包含元素的上内边框之间的像素距离。
+
+    所有这些偏移量属性都是只读的，而且每次访问它们都需要重新计算。因此，应
+    该尽量避免重复访问这些属性；如果需要重复使用其中某些属性的值，可以将它们保
+    存在局部变量中，以提高性能。
+
+    ​
+
+  * 客户区大小 
+
+    * clientWidth : 元素内容区宽度加上左右内边距宽度
+    * clientHeight : 是元素内容区高度加上上下内边距高度
+
+    width + padding + margin 
+
+    ​
+
+  * 滚动大小
+
+    * scrollHeight：在没有滚动条的情况下，元素内容的总高度。
+
+    * scrollWidth：在没有滚动条的情况下，元素内容的总宽度。
+
+    * scrollLeft：被隐藏在内容区域左侧的像素数。通过设置这个属性可以改变元素的滚动位置。
+
+    * scrollTop：被隐藏在内容区域上方的像素数。通过设置这个属性可以改变元素的滚动位置。
+
+      ​
+
+  * 确定元素大小 
+
+    * top
+    * left
+    * right
+    * bottom
+    * height
+    * width
+
+    对于不支持getBoundingClientRect()的浏览器，可以通过其他手段取得相同的信息。一般来
+    说，right 和left 的差值与offsetWidth 的值相等，而bottom 和top 的差值与offsetHeight
+    相等.
+
+    ```javascript
+    var parent = document.getElementById('app');
+    var box = parent.getBoundClientRect();
+
+    height = box.bottom - box.top;
+    width = box.right - box.left;
+    ```
 
 
 
 
 
+* ​
 
-
-
-
-
-
-
-
-
+  ​
 
