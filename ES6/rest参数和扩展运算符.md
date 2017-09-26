@@ -11,16 +11,6 @@ const getOption = function(...args) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 #### 扩展运算符 ...arg 将一个数组转为逗号分隔参数序列
 
 * 不使用Apply去调用函数
